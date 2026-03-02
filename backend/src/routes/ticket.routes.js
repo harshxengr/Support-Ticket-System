@@ -1,12 +1,25 @@
-import express from "express";
-import * as controller from "../controllers/ticket.controller.js";
+import { Router } from "express";
+import { asyncHandler } from "../middleware/asyncHandler.js";
+import { requireAuth, requireRole } from "../middleware/auth.js";
+import {
+  classifyTicketPreview,
+  createTicket,
+  getDashboardStats,
+  getTicketById,
+  listTickets,
+  updateTicketStatus
+} from "../controllers/ticket.controller.js";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/", controller.create);
-router.get("/", controller.list);
-router.patch("/:id", controller.update);
-router.get("/stats", controller.stats);
-router.post("/classify", controller.classify);
+router.post("/classify", asyncHandler(classifyTicketPreview));
+
+router.use(requireAuth);
+
+router.get("/dashboard/stats", asyncHandler(getDashboardStats));
+router.get("/", asyncHandler(listTickets));
+router.post("/", asyncHandler(createTicket));
+router.get("/:id", asyncHandler(getTicketById));
+router.patch("/:id/status", requireRole(["ADMIN", "SUPPORT_AGENT"]), asyncHandler(updateTicketStatus));
 
 export default router;

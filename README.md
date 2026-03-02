@@ -1,99 +1,141 @@
-# Support Ticket System with AI Classification
+# Support Ticket System
 
-A full-stack support ticket management system built with **React**, **Express**, and **Prisma**. This system features automatic ticket classification (category and priority) using **Google Gemini AI**.
+A modern, performant support ticket management system built with React and Express.
 
-## 🚀 Key Features
+## Features
 
-- **Ticket Management**: Create, view, and track support tickets.
-- **AI-Powered Classification**: Automatically suggests categories (billing, technical, account, general) and priorities (low, medium, high, critical) using Google Gemini AI.
-- **Status Dashboard**: Real-time overview of ticket statistics (Open, In Progress, Resolved).
-- **Modern UI**: Clean and responsive interface built with React.
-- **Dockerized Setup**: Seamless deployment using Docker and Docker Compose.
+- 🎫 Create and manage support tickets
+- 📊 Dashboard with analytics and trends
+- 🔐 User authentication with Better Auth
+- 🤖 AI-powered ticket classification
+- 🌙 Dark mode support
+- 📱 Responsive design
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Frontend**: React, Vite, Axios.
-- **Backend**: Node.js, Express.js.
-- **Database**: PostgreSQL (managed via Prisma ORM).
-- **AI Implementation**: Google Generative AI (Gemini 1.5 Flash).
-- **Containerization**: Docker, Docker Compose.
+### Frontend
+- React 19 with TypeScript
+- Vite for build tooling
+- Tailwind CSS for styling
+- React Query for state management
+- Recharts for data visualization
+- Framer Motion for animations
 
-## 📋 Prerequisites
+### Backend
+- Express.js with Node.js
+- Prisma ORM with PostgreSQL
+- Better Auth for authentication
+- Google Gemini AI for ticket classification
+- Zod for validation
 
-Before you begin, ensure you have the following installed:
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
-- A [Google Gemini API Key](https://aistudio.google.com/app/apikey)
+## Getting Started
 
-## ⚙️ Environment Setup
+### Prerequisites
+- Node.js 18+
+- PostgreSQL database
 
-1. Clone the repository:
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
    ```bash
-   git clone https://github.com/harshxengr/Support-Ticket-System.git
-   cd Support-Ticket-System
+   # Backend
+   cd backend
+   npm install
+   
+   # Frontend
+   cd ../frontend
+   npm install
    ```
 
-2. Create a `.env` file in the root directory (you can use `.env.example` as a template):
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/support_db?schema=public"
-   GEMINI_API_KEY="your_gemini_api_key_here"
-   PORT=5000
+3. Set up environment variables:
+   ```bash
+   # Backend
+   cp .env.example .env
+   # Edit .env with your database URL and API keys
    ```
 
-> [!IMPORTANT]
-> When running with Docker Compose, the `DATABASE_URL` should point to the database service defined in the compose file or an external instance as per your configuration.
+4. Set up the database:
+   ```bash
+   cd backend
+   npx prisma migrate dev
+   npx prisma generate
+   ```
 
-## 🚀 Running the Project
+5. Start the development servers:
+   ```bash
+   # Backend (port 5000)
+   cd backend
+   npm run dev
+   
+   # Frontend (port 5173)
+   cd ../frontend
+   npm run dev
+   ```
 
-### Using Docker (Simplified)
+## Environment Variables
 
-The easiest way to get the system running is using Docker Compose:
+### Backend (.env)
+- `DATABASE_URL` - PostgreSQL connection string
+- `GEMINI_API_KEY` - Google Gemini API key for AI classification
+- `BETTER_AUTH_SECRET` - Secret for authentication
+- `CORS_ORIGIN` - Frontend URL (default: http://localhost:5173)
 
-```bash
-docker-compose up --build
+## Project Structure
+
 ```
-
-- **Frontend**: [http://localhost:5173](http://localhost:5173)
-- **Backend API**: [http://localhost:5000](http://localhost:5000)
-
-### Local Development
-
-#### 1. Backend Setup
-```bash
-cd backend
-npm install
-npx prisma generate
-npm run dev
-```
-
-#### 2. Frontend Setup
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## 📁 Project Structure
-
-```text
-Support-Ticket-System/
-├── backend/            # Express API with Prisma & Gemini AI
+├── backend/
 │   ├── src/
-│   │   ├── controllers/# Business logic
-│   │   ├── services/   # AI classification & DB services
-│   │   └── routes/     # API endpoints
-│   └── prisma/         # Database schema
-├── frontend/           # React Application
-│   └── src/
-│       ├── features/   # Ticket modules & components
-│       └── api/        # Axios configuration
-└── docker-compose.yml  # Orchestration
+│   │   ├── controllers/    # Route handlers
+│   │   ├── services/       # Business logic
+│   │   ├── routes/         # API routes
+│   │   ├── middleware/     # Express middleware
+│   │   └── config/         # Configuration files
+│   ├── prisma/
+│   │   └── schema.prisma   # Database schema
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── features/       # Feature-specific components
+│   │   ├── lib/           # Utilities and configurations
+│   │   └── app/           # App setup and routing
+│   └── package.json
+└── README.md
 ```
 
-## 🤝 Contributing
+## Scripts
 
-Feel free to fork this project, open issues, and submit pull requests to improve the system!
+### Backend
+- `npm run dev` - Start development server
+- `npm start` - Start production server
+- `npm run prisma:studio` - Open Prisma Studio
+- `npm run prisma:migrate` - Run database migrations
 
-## 📄 License
+### Frontend
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-This project is licensed under the ISC License.
+## Performance Optimizations
+
+This application includes several performance optimizations:
+
+- Database indexing for fast queries
+- Code splitting and lazy loading
+- Optimized React Query caching
+- Efficient API response patterns
+- Minimal bundle sizes
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+MIT License - see LICENSE file for details.
