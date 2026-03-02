@@ -1,0 +1,3 @@
+export const STATUS_VALUES = ["OPEN", "IN_PROGRESS", "RESOLVED"];
+export const PRIORITY_VALUES = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+export const CATEGORY_VALUES = ["BILLING", "TECHNICAL", "ACCOUNT", "GENERAL"];

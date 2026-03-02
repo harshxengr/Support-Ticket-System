@@ -28,10 +28,8 @@ ${description}
 `;
 
     const result = await model.generateContent(prompt);
-
     const text = result.response.text();
 
-    // Extract JSON safely
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error("Invalid JSON response");
 
@@ -43,8 +41,6 @@ ${description}
     };
 
   } catch (error) {
-    console.error("Gemini classification error:", error.message);
-
     return {
       category: null,
       priority: null,
